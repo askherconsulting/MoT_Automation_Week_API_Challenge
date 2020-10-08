@@ -1,0 +1,912 @@
+{
+	"info": {
+		"_postman_id": "a65ff539-584e-4ebb-a9ac-58e17cab8820",
+		"name": "ResponseContent",
+		"description": "Check each response content-type and type/format for each response body item.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "CreateTokenAutomationInTesting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ea47ac7f-b3e1-4b71-8a31-506a863e7381",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"authToken\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{aitbaseURL}}/auth/login",
+							"host": [
+								"{{aitbaseURL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Booking",
+			"item": [
+				{
+					"name": "Booking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6d7c69fd-ba17-420d-bd2a-41333e966d91",
+								"exec": [
+									"pm.test(\"Status code should be 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"bookingid\", jsonData.bookings[0].bookingid);",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"roomid\", jsonData.bookings[0].roomid);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bookingdates\": {\n        \"checkin\": \"{{checkin}}\",\n        \"checkout\": \"{{checkout}}\"\n    },\n    \"depositpaid\": false,\n    \"firstname\": \"test\",\n    \"lastname\": \"person\",\n    \"roomid\": 1,\n    \"email\": \"test@test.com\",\n    \"phone\": \"12345678910\"\n}"
+						},
+						"url": {
+							"raw": "{{aitbaseURL}}/booking/",
+							"host": [
+								"{{aitbaseURL}}"
+							],
+							"path": [
+								"booking",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e3294fa0-35c3-4743-b03f-c6b21cfd4241",
+								"exec": [
+									"pm.test(\"Status code should be 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response Content-Type should be json\", function () {",
+									"    pm.response.to.be.json;",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response should contain firstname\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.bookings[0].firstname).to.not.be.null;",
+									"    pm.expect(jsonData.bookings[0].firstname).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Response should contain lastname\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.bookings[0].lastname).to.not.be.null;",
+									"    pm.expect(jsonData.bookings[0].lastname).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Response should contain depositpaid\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.bookings[0].depositpaid).to.not.be.null;",
+									"    pm.expect(jsonData.bookings[0].depositpaid).to.be.a('boolean');",
+									"});",
+									"",
+									"pm.test(\"Response should contain bookingdates.checkin\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.bookings[0].bookingdates.checkin).to.not.be.null;",
+									"    pm.expect(jsonData.bookings[0].bookingdates.checkin).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Response should contain bookingdates.checkout\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.bookings[0].bookingdates.checkout).to.not.be.null;",
+									"    pm.expect(jsonData.bookings[0].bookingdates.checkout).to.be.a('string');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "30ab7cf8-0a77-46d4-9167-43301c592c08",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{aitbaseURL}}/booking/?roomid={{roomid}}",
+							"host": [
+								"{{aitbaseURL}}"
+							],
+							"path": [
+								"booking",
+								""
+							],
+							"query": [
+								{
+									"key": "roomid",
+									"value": "{{roomid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateBooking",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ef55e3c2-8c8e-495e-b008-00be5ee78ade",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "6563e02d-59a4-430c-8cd3-c461b9294be1",
+								"exec": [
+									"pm.test(\"Status code should be 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response Content-Type should be json\", function () {",
+									"    pm.response.to.be.json;",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response should contain firstname\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.bookings[0].firstname).to.not.be.null;",
+									"    pm.expect(jsonData.bookings[0].firstname).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Response should contain lastname\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.bookings[0].lastname).to.not.be.null;",
+									"    pm.expect(jsonData.bookings[0].lastname).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Response should contain depositpaid\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.bookings[0].depositpaid).to.not.be.null;",
+									"    pm.expect(jsonData.bookings[0].depositpaid).to.be.a('boolean');",
+									"});",
+									"",
+									"pm.test(\"Response should contain bookingdates.checkin\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.bookings[0].bookingdates.checkin).to.not.be.null;",
+									"    pm.expect(jsonData.bookings[0].bookingdates.checkin).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Response should contain bookingdates.checkout\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.bookings[0].bookingdates.checkout).to.not.be.null;",
+									"    pm.expect(jsonData.bookings[0].bookingdates.checkout).to.be.a('string');",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "cookie",
+								"value": "_ga=GA1.2.678941400.1597673552; __cfduid=d8a9d854bf17bb3410e105f31a49c04071602155398; _gid=GA1.2.1852285276.1602155386; token=0SMtYDcAOnb0iZGv; _gat=1"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bookingdates\": {\n        \"checkin\": \"{{checkin}}\",\n        \"checkout\": \"{{checkout}}\"\n    },\n    \"depositpaid\": false,\n    \"firstname\": \"test\",\n    \"lastname\": \"person\",\n    \"roomid\": 1,\n    \"email\": \"test@test.com\",\n    \"phone\": \"12345678910\"\n}"
+						},
+						"url": {
+							"raw": "{{aitbaseURL}}/booking/{{bookingid}}",
+							"host": [
+								"{{aitbaseURL}}"
+							],
+							"path": [
+								"booking",
+								"{{bookingid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteBooking",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "780c1436-6089-4c5a-9774-d568ffe91258",
+								"exec": [
+									"// Test precondition: At least one booking exists, so create one",
+									"var baseURL = pm.environment.get(\"aitbaseURL\");",
+									"var requestURL = baseURL + \"/booking\";",
+									"",
+									"const echoPostRequest = {",
+									"    url: requestURL,",
+									"    method: 'POST',",
+									"    header: 'Content-Type:application/json',",
+									"    body: {",
+									"        mode: 'raw',",
+									"        raw: JSON.stringify({",
+									"            \"firstname\": pm.environment.get(\"firstname\"),",
+									"            \"lastname\": pm.environment.get(\"lastname\"),",
+									"            \"totalprice\": pm.environment.get(\"totalprice\"),",
+									"            \"depositpaid\": pm.environment.get(\"depositpaid\"),",
+									"            \"bookingdates\": {",
+									"                \"checkin\": pm.environment.get(\"checkin\"),",
+									"                \"checkout\": pm.environment.get(\"checkout\")",
+									"            },",
+									"            \"additionalneeds\": pm.environment.get(\"additionalneeds\")",
+									"        })",
+									"    }",
+									"};",
+									"",
+									"pm.sendRequest(echoPostRequest, function (err, res) {",
+									"    pm.environment.set(\"bookingid\", res.json().bookingid);",
+									"    var logTitle = pm.info.requestName + \" | \" + pm.info.eventName + \":\\n\";",
+									"    console.log(err ? err : logTitle + JSON.stringify(res.json(), null, 2));",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "fc86b231-9b82-4672-8ae6-430df82f3831",
+								"exec": [
+									"var url = pm.environment.get(\"aitbaseURL\") + \"/booking\" +  pm.environment.get(\"bookingid\");",
+									"",
+									"const getRequest = {",
+									"        url: url,",
+									"        method: 'GET'",
+									"};",
+									"",
+									"pm.sendRequest(getRequest, function (err, res) {",
+									"    if (err) { ",
+									"        console.log(err);",
+									"    }",
+									"    ",
+									"    console.log(res);",
+									"    ",
+									"    pm.test('Response should be Not Found', function () {",
+									"        pm.expect(res.status).to.include(\"Not Found\");",
+									"    });",
+									"    ",
+									"    pm.test(\"Response code 404\", function() {",
+									"        pm.expect(res.code).to.equal(404);",
+									"    })",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "token={{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{aitbaseURL}}/booking/{{bookingid}}",
+							"host": [
+								"{{aitbaseURL}}"
+							],
+							"path": [
+								"booking",
+								"{{bookingid}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2e12e2fa-5227-4688-bd56-0059126923db",
+						"type": "text/javascript",
+						"exec": [
+							"var baseURL = pm.environment.get(\"baseURL\");",
+							"var requestURL = baseURL + \"/auth\";",
+							"",
+							"const echoPostRequest = {",
+							"    url: requestURL,",
+							"    method: 'POST',",
+							"    header: 'Content-Type:application/json',",
+							"    body: {",
+							"        mode: 'raw',",
+							"        raw: JSON.stringify({",
+							"            \"username\": \"admin\",",
+							"            \"password\": \"password123\"",
+							"        })",
+							"    }",
+							"};",
+							"",
+							"pm.sendRequest(echoPostRequest, function (err, res) {",
+							"    pm.environment.set(\"token\", res.json().token);",
+							"    var logTitle = pm.info.requestName + \" | \" + pm.info.eventName + \":\\n\";",
+							"    console.log(err ? err : logTitle + JSON.stringify(res.json(), null, 2));",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b22be156-b77f-444d-a4a3-aa0d47087441",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Branding",
+			"item": [
+				{
+					"name": "GetBranding",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6e08d050-1640-4284-b29f-5550887d9ab3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automationintesting.online/branding/",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"branding",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateBranding",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c63b14db-afea-4b24-a47a-e83ae54ecbf1",
+								"exec": [
+									"pm.test(\"Status code is 202\", function () {\r",
+									"    pm.response.to.have.status(202);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Shady Meadows B&B\",\r\n    \"map\": {\r\n        \"latitude\": \"46.187573\",\r\n        \"longitude\": \"-123.832640\"\r\n    },\r\n    \"logoUrl\": \"https://www.mwtestconsultancy.co.uk/img/rbp-logo.png\",\r\n    \"description\": \"Welcome to The Goonies House, a delightful Bed & Breakfast nestled in the hills of Astoria, Oregon. A place so beautiful you will never want to leave. All our rooms have comfortable beds and we provide breakfast from the locally sourced supermarket. It is a delightful place.\",\r\n    \"contact\": {\r\n        \"name\": \"Shady Meadows B&B\",\r\n        \"address\": \"The Old Farmhouse, Shady Street, Newfordburyshire, NE1 410S\",\r\n        \"phone\": \"012345678901\",\r\n        \"email\": \"fake@fakeemail.com\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://automationintesting.online/branding/",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"branding",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Report",
+			"item": [
+				{
+					"name": "Report",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5c9320fd-e8c2-4ff9-ac2f-62a133aecd8c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automationintesting.online/report/",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"report",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Messaging",
+			"item": [
+				{
+					"name": "Message",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "78c7277e-9bbe-4428-b863-40a6f6a1dc45",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"messageid\", jsonData.messageid);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"email\": \"test@test.com\",\r\n    \"phone\": \"07797998887\",\r\n    \"subject\": \"test message\",\r\n    \"description\": \"test message your hotel is awesome\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://automationintesting.online/message/",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"message",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MessageRead",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "291c7b8b-50d8-4c5d-9a27-5bf2d6f928b0",
+								"exec": [
+									"pm.test(\"Status code is 202\", function () {\r",
+									"    pm.response.to.have.status(202);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://automationintesting.online/message/{{messageid}}/read",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"message",
+								"{{messageid}}",
+								"read"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Message",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9a0e8cf6-a59c-4dc8-9364-2edd6f305f3d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automationintesting.online/message/{{messageid}}",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"message",
+								"{{messageid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Messages",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3773759d-384f-4b33-b69b-755fcb9e9108",
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var messageId = pm.environment.get(\"messageid\")\r",
+									"\r",
+									"var data = JSON.parse(responseBody);\r",
+									"tests[\"posted message has been read\"] = data.messages[messageId -1].read === true;\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://automationintesting.online/message/",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"message",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Room",
+			"item": [
+				{
+					"name": "Room",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "928e85b7-b3b9-489c-9f66-fc6e28e798fe",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{aitbaseURL}}/room/",
+							"host": [
+								"{{aitbaseURL}}"
+							],
+							"path": [
+								"room",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Room",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Room",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0e207318-c85a-4b31-b080-d8e9bae8137a",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"roomid\", jsonData.roomid);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token = {{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"roomNumber\": \"666\",\r\n    \"type\": \"Single\",\r\n    \"accessible\": \"true\",\r\n    \"description\": \"Please enter a description for this room\",\r\n    \"image\": \"https://www.mwtestconsultancy.co.uk/img/room1.jpg\",\r\n    \"roomPrice\": \"300\",\r\n    \"features\": [\r\n        \"WiFi\",\r\n        \"Views\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{aitbaseURL}}/room/",
+							"host": [
+								"{{aitbaseURL}}"
+							],
+							"path": [
+								"room",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Room",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9df1b668-466e-482b-9806-ef67a592d4da",
+								"exec": [
+									"pm.test(\"Status code is 202\", function () {\r",
+									"    pm.response.to.have.status(202);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token = {{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{aitbaseURL}}/room/{{roomid}}",
+							"host": [
+								"{{aitbaseURL}}"
+							],
+							"path": [
+								"room",
+								"{{roomid}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "18ddfd74-c6ef-441e-b4e7-8c7757aa4997",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "248299d7-f234-4b1b-a4fe-b20a527dcb36",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
