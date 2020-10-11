@@ -18,7 +18,7 @@
 								"id": "a318f680-1f50-4ca6-ab57-9d6eff770e10",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {\r",
-									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');\r",
+									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
@@ -110,7 +110,7 @@
 								"id": "db03dc03-7666-4f04-86dd-a37a8eb2eb13",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {\r",
-									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');\r",
+									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
 									"});\r",
 									"\r",
 									"// This test wail fail as the api status code is wrong\r",
@@ -335,10 +335,9 @@
 									"            }\r",
 									"};\r",
 									"\r",
-									"\r",
 									"//roomid being returned as a null instead of picking up number - how do I fix this? (do I need to parse the response first?)\r",
 									"pm.sendRequest(echoPostRequest, function (err, res) {\r",
-									"    pm.environment.set(\"roomid\", res.json().roomid);\r",
+									" //   pm.environment.set(\"roomid\", res.json().roomid);\r",
 									"    var logTitle = pm.info.requestName + \" | \" + pm.info.eventName + \":\\n\";\r",
 									"    console.log(err ? err : logTitle + JSON.stringify(res.json(), null, 2));\r",
 									"});\r",
@@ -374,123 +373,6 @@
 							"path": [
 								"booking",
 								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Booking",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "03299612-01b8-46da-8c3f-82a31f6ca1c3",
-								"exec": [
-									"pm.test(\"Status code is 201\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});\r",
-									"\r",
-									"var jsonData = JSON.parse(responseBody);\r",
-									"postman.setEnvironmentVariable(\"bookingid\", jsonData.bookingid);\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2020-12-17\",\r\n        \"checkout\": \"2020-12-18\"\r\n    },\r\n    \"depositpaid\": false,\r\n    \"firstname\": \"test\",\r\n    \"lastname\": \"person\",\r\n    \"roomid\": {{roomid}},\r\n    \"email\": \"test@test.com\",\r\n    \"phone\": \"12345678910\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{aitbaseURL}}/booking/",
-							"host": [
-								"{{aitbaseURL}}"
-							],
-							"path": [
-								"booking",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetBookingIds",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "34db134c-e0e1-4698-89fe-a71d93961bd3",
-								"exec": [
-									"pm.test(\"Response Content-Type should be json\", function () {",
-									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
-									"});",
-									"",
-									"pm.test(\"Status code should be 200 OK\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"schema = {",
-									"    \"bookings\": [",
-									"        {",
-									"            \"bookingid\": 1,",
-									"            \"roomid\": 1,",
-									"            \"firstname\": \"James\",",
-									"            \"lastname\": \"Dean\",",
-									"            \"depositpaid\": true,",
-									"            \"bookingdates\": {",
-									"                \"checkin\": \"2020-02-01\",",
-									"                \"checkout\": \"2020-02-05\"",
-									"            }",
-									"        }",
-									"    ]",
-									"}",
-									"",
-									"pm.test(\"Schema is as expected\", function() {",
-									"    var response = pm.response.json();",
-									"    ",
-									"    var result=tv4.validateResult(response, schema)",
-									"    pm.expect(result.valid).to.be.true;",
-									"});",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{aitbaseURL}}/booking",
-							"host": [
-								"{{aitbaseURL}}"
-							],
-							"path": [
-								"booking"
 							]
 						}
 					},
@@ -671,6 +553,78 @@
 							"path": [
 								"booking",
 								"{{bookingid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetBookingIds",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34db134c-e0e1-4698-89fe-a71d93961bd3",
+								"exec": [
+									"pm.test(\"Response Content-Type should be json\", function () {",
+									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+									"});",
+									"",
+									"pm.test(\"Status code should be 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"schema = {",
+									"    \"bookings\": [",
+									"        {",
+									"            \"bookingid\": 1,",
+									"            \"roomid\": 1,",
+									"            \"firstname\": \"James\",",
+									"            \"lastname\": \"Dean\",",
+									"            \"depositpaid\": true,",
+									"            \"bookingdates\": {",
+									"                \"checkin\": \"2020-02-01\",",
+									"                \"checkout\": \"2020-02-05\"",
+									"            }",
+									"        }",
+									"    ]",
+									"}",
+									"",
+									"pm.test(\"Schema is as expected\", function() {",
+									"    var response = pm.response.json();",
+									"    ",
+									"    var result=tv4.validateResult(response, schema)",
+									"    pm.expect(result.valid).to.be.true;",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{aitbaseURL}}/booking",
+							"host": [
+								"{{aitbaseURL}}"
+							],
+							"path": [
+								"booking"
 							]
 						}
 					},
@@ -965,10 +919,10 @@
 							"script": {
 								"id": "500e9b59-6811-41c7-a30d-b54dad1a8327",
 								"exec": [
-									"//\"Text\" seems to be the response type but its obviously an empty response body - how can I update this to check for the correct value if \"Text\" doesn't work?",
-									"",
-									"pm.test(\"Response Content-Type should be json\", function () {",
-									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('Text');",
+									"//added in a negative test to check for absence of response body/error",
+									"pm.test(\"response should be ok to process\", function () {",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.not.have.jsonBody;",
 									"});",
 									"",
 									"//added an extra \"/\" in the URL to hit the correct endpoint",
@@ -1123,218 +1077,6 @@
 		{
 			"name": "Branding",
 			"item": [
-				{
-					"name": "GetBranding",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "fb0893b5-eede-4aa2-a543-14925a818a85",
-								"exec": [
-									"\r",
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"\r",
-									"// API Contract test to validate schema\r",
-									"// To generate the below schema, send this request and then copy and paste the \r",
-									"// response body into the following website https://jsonschema.net/home\r",
-									"// Next copy the generated JSON schema into the below schema :-)\r",
-									"schema = {\r",
-									"    \"default\": {},\r",
-									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
-									"    \"required\": [\r",
-									"        \"name\",\r",
-									"        \"map\",\r",
-									"        \"logoUrl\",\r",
-									"        \"description\",\r",
-									"        \"contact\"\r",
-									"    ],\r",
-									"    \"title\": \"The root schema\",\r",
-									"    \"properties\": {\r",
-									"        \"name\": {\r",
-									"            \"$id\": \"#/properties/name\",\r",
-									"            \"type\": \"string\",\r",
-									"            \"title\": \"The name schema\",\r",
-									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
-									"            \"default\": \"\",\r",
-									"            \"examples\": [\r",
-									"                \"Shady Meadows B&B\"\r",
-									"            ]\r",
-									"        },\r",
-									"        \"map\": {\r",
-									"            \"$id\": \"#/properties/map\",\r",
-									"            \"type\": \"object\",\r",
-									"            \"title\": \"The map schema\",\r",
-									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
-									"            \"default\": {},\r",
-									"            \"examples\": [\r",
-									"                {\r",
-									"                    \"latitude\": 52.6351204,\r",
-									"                    \"longitude\": 1.2733774\r",
-									"                }\r",
-									"            ],\r",
-									"            \"required\": [\r",
-									"                \"latitude\",\r",
-									"                \"longitude\"\r",
-									"            ],\r",
-									"            \"properties\": {\r",
-									"                \"latitude\": {\r",
-									"                    \"$id\": \"#/properties/map/properties/latitude\",\r",
-									"                    \"type\": \"number\",\r",
-									"                    \"title\": \"The latitude schema\",\r",
-									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
-									"                    \"default\": 0.0,\r",
-									"                    \"examples\": [\r",
-									"                        52.6351204\r",
-									"                    ]\r",
-									"                },\r",
-									"                \"longitude\": {\r",
-									"                    \"$id\": \"#/properties/map/properties/longitude\",\r",
-									"                    \"type\": \"number\",\r",
-									"                    \"title\": \"The longitude schema\",\r",
-									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
-									"                    \"default\": 0.0,\r",
-									"                    \"examples\": [\r",
-									"                        1.2733774\r",
-									"                    ]\r",
-									"                }\r",
-									"            },\r",
-									"            \"additionalProperties\": true\r",
-									"        },\r",
-									"        \"logoUrl\": {\r",
-									"            \"$id\": \"#/properties/logoUrl\",\r",
-									"            \"type\": \"string\",\r",
-									"            \"title\": \"The logoUrl schema\",\r",
-									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
-									"            \"default\": \"\",\r",
-									"            \"examples\": [\r",
-									"                \"https://www.mwtestconsultancy.co.uk/img/rbp-logo.png\"\r",
-									"            ]\r",
-									"        },\r",
-									"        \"description\": {\r",
-									"            \"$id\": \"#/properties/description\",\r",
-									"            \"type\": \"string\",\r",
-									"            \"title\": \"The description schema\",\r",
-									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
-									"            \"default\": \"\",\r",
-									"            \"examples\": [\r",
-									"                \"Welcome to Shady Meadows, a delightful Bed & Breakfast nestled in the hills on Newingtonfordburyshire. A place so beautiful you will never want to leave. All our rooms have comfortable beds and we provide breakfast from the locally sourced supermarket. It is a delightful place.\"\r",
-									"            ]\r",
-									"        },\r",
-									"        \"contact\": {\r",
-									"            \"$id\": \"#/properties/contact\",\r",
-									"            \"type\": \"object\",\r",
-									"            \"title\": \"The contact schema\",\r",
-									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
-									"            \"default\": {},\r",
-									"            \"examples\": [\r",
-									"                {\r",
-									"                    \"name\": \"Shady Meadows B&B\",\r",
-									"                    \"address\": \"The Old Farmhouse, Shady Street, Newfordburyshire, NE1 410S\",\r",
-									"                    \"phone\": \"012345678901\",\r",
-									"                    \"email\": \"fake@fakeemail.com\"\r",
-									"                }\r",
-									"            ],\r",
-									"            \"required\": [\r",
-									"                \"name\",\r",
-									"                \"address\",\r",
-									"                \"phone\",\r",
-									"                \"email\"\r",
-									"            ],\r",
-									"            \"properties\": {\r",
-									"                \"name\": {\r",
-									"                    \"$id\": \"#/properties/contact/properties/name\",\r",
-									"                    \"type\": \"string\",\r",
-									"                    \"title\": \"The name schema\",\r",
-									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
-									"                    \"default\": \"\",\r",
-									"                    \"examples\": [\r",
-									"                        \"Shady Meadows B&B\"\r",
-									"                    ]\r",
-									"                },\r",
-									"                \"address\": {\r",
-									"                    \"$id\": \"#/properties/contact/properties/address\",\r",
-									"                    \"type\": \"string\",\r",
-									"                    \"title\": \"The address schema\",\r",
-									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
-									"                    \"default\": \"\",\r",
-									"                    \"examples\": [\r",
-									"                        \"The Old Farmhouse, Shady Street, Newfordburyshire, NE1 410S\"\r",
-									"                    ]\r",
-									"                },\r",
-									"                \"phone\": {\r",
-									"                    \"$id\": \"#/properties/contact/properties/phone\",\r",
-									"                    \"type\": \"string\",\r",
-									"                    \"title\": \"The phone schema\",\r",
-									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
-									"                    \"default\": \"\",\r",
-									"                    \"examples\": [\r",
-									"                        \"012345678901\"\r",
-									"                    ]\r",
-									"                },\r",
-									"                \"email\": {\r",
-									"                    \"$id\": \"#/properties/contact/properties/email\",\r",
-									"                    \"type\": \"string\",\r",
-									"                    \"title\": \"The email schema\",\r",
-									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
-									"                    \"default\": \"\",\r",
-									"                    \"examples\": [\r",
-									"                        \"fake@fakeemail.com\"\r",
-									"                    ]\r",
-									"                }\r",
-									"            },\r",
-									"            \"additionalProperties\": true\r",
-									"        }\r",
-									"    },\r",
-									"    \"additionalProperties\": true\r",
-									"}\r",
-									"\r",
-									"pm.test(\"Schema is as expected\", function() {\r",
-									"    var response = pm.response.json();\r",
-									"    \r",
-									"    var result=tv4.validateResult(response, schema)\r",
-									"    pm.expect(result.valid).to.be.true;\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response body values are as expected\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"   \r",
-									"    pm.expect(jsonData.name).to.equal(\"Shady Meadows B&B\")\r",
-									"    pm.expect(jsonData.map.latitude).to.equal(52.6351204)\r",
-									"    pm.expect(jsonData.map.longitude).to.equal(1.2733774)\r",
-									"    pm.expect(jsonData.logoUrl).to.equal(\"https://www.mwtestconsultancy.co.uk/img/rbp-logo.png\")\r",
-									"    pm.expect(jsonData.description).to.equal(\"Welcome to Shady Meadows, a delightful Bed & Breakfast nestled in the hills on Newingtonfordburyshire. A place so beautiful you will never want to leave. All our rooms have comfortable beds and we provide breakfast from the locally sourced supermarket. It is a delightful place.\")\r",
-									"    \r",
-									"    pm.expect(jsonData.contact.name).to.equal(\"Shady Meadows B&B\")\r",
-									"    pm.expect(jsonData.contact.address).to.equal(\"The Old Farmhouse, Shady Street, Newfordburyshire, NE1 410S\")\r",
-									"    pm.expect(jsonData.contact.phone).to.equal(\"012345678901\")\r",
-									"    pm.expect(jsonData.contact.email).to.equal(\"fake@fakeemail.com\")\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://automationintesting.online/branding/",
-							"protocol": "https",
-							"host": [
-								"automationintesting",
-								"online"
-							],
-							"path": [
-								"branding",
-								""
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "UpdateBranding",
 					"event": [
@@ -1553,6 +1295,220 @@
 								}
 							}
 						},
+						"url": {
+							"raw": "https://automationintesting.online/branding/",
+							"protocol": "https",
+							"host": [
+								"automationintesting",
+								"online"
+							],
+							"path": [
+								"branding",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetBranding",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fb0893b5-eede-4aa2-a543-14925a818a85",
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// API Contract test to validate schema\r",
+									"// To generate the below schema, send this request and then copy and paste the \r",
+									"// response body into the following website https://jsonschema.net/home\r",
+									"// Next copy the generated JSON schema into the below schema :-)\r",
+									"schema = {\r",
+									"    \"default\": {},\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"required\": [\r",
+									"        \"name\",\r",
+									"        \"map\",\r",
+									"        \"logoUrl\",\r",
+									"        \"description\",\r",
+									"        \"contact\"\r",
+									"    ],\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"properties\": {\r",
+									"        \"name\": {\r",
+									"            \"$id\": \"#/properties/name\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The name schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"Shady Meadows B&B\"\r",
+									"            ]\r",
+									"        },\r",
+									"        \"map\": {\r",
+									"            \"$id\": \"#/properties/map\",\r",
+									"            \"type\": \"object\",\r",
+									"            \"title\": \"The map schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": {},\r",
+									"            \"examples\": [\r",
+									"                {\r",
+									"                    \"latitude\": 52.6351204,\r",
+									"                    \"longitude\": 1.2733774\r",
+									"                }\r",
+									"            ],\r",
+									"            \"required\": [\r",
+									"                \"latitude\",\r",
+									"                \"longitude\"\r",
+									"            ],\r",
+									"            \"properties\": {\r",
+									"                \"latitude\": {\r",
+									"                    \"$id\": \"#/properties/map/properties/latitude\",\r",
+									"                    \"type\": \"number\",\r",
+									"                    \"title\": \"The latitude schema\",\r",
+									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                    \"default\": 0.0,\r",
+									"                    \"examples\": [\r",
+									"                        52.6351204\r",
+									"                    ]\r",
+									"                },\r",
+									"                \"longitude\": {\r",
+									"                    \"$id\": \"#/properties/map/properties/longitude\",\r",
+									"                    \"type\": \"number\",\r",
+									"                    \"title\": \"The longitude schema\",\r",
+									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                    \"default\": 0.0,\r",
+									"                    \"examples\": [\r",
+									"                        1.2733774\r",
+									"                    ]\r",
+									"                }\r",
+									"            },\r",
+									"            \"additionalProperties\": true\r",
+									"        },\r",
+									"        \"logoUrl\": {\r",
+									"            \"$id\": \"#/properties/logoUrl\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The logoUrl schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"https://www.mwtestconsultancy.co.uk/img/rbp-logo.png\"\r",
+									"            ]\r",
+									"        },\r",
+									"        \"description\": {\r",
+									"            \"$id\": \"#/properties/description\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The description schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"Welcome to Shady Meadows, a delightful Bed & Breakfast nestled in the hills on Newingtonfordburyshire. A place so beautiful you will never want to leave. All our rooms have comfortable beds and we provide breakfast from the locally sourced supermarket. It is a delightful place.\"\r",
+									"            ]\r",
+									"        },\r",
+									"        \"contact\": {\r",
+									"            \"$id\": \"#/properties/contact\",\r",
+									"            \"type\": \"object\",\r",
+									"            \"title\": \"The contact schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": {},\r",
+									"            \"examples\": [\r",
+									"                {\r",
+									"                    \"name\": \"Shady Meadows B&B\",\r",
+									"                    \"address\": \"The Old Farmhouse, Shady Street, Newfordburyshire, NE1 410S\",\r",
+									"                    \"phone\": \"012345678901\",\r",
+									"                    \"email\": \"fake@fakeemail.com\"\r",
+									"                }\r",
+									"            ],\r",
+									"            \"required\": [\r",
+									"                \"name\",\r",
+									"                \"address\",\r",
+									"                \"phone\",\r",
+									"                \"email\"\r",
+									"            ],\r",
+									"            \"properties\": {\r",
+									"                \"name\": {\r",
+									"                    \"$id\": \"#/properties/contact/properties/name\",\r",
+									"                    \"type\": \"string\",\r",
+									"                    \"title\": \"The name schema\",\r",
+									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                    \"default\": \"\",\r",
+									"                    \"examples\": [\r",
+									"                        \"Shady Meadows B&B\"\r",
+									"                    ]\r",
+									"                },\r",
+									"                \"address\": {\r",
+									"                    \"$id\": \"#/properties/contact/properties/address\",\r",
+									"                    \"type\": \"string\",\r",
+									"                    \"title\": \"The address schema\",\r",
+									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                    \"default\": \"\",\r",
+									"                    \"examples\": [\r",
+									"                        \"The Old Farmhouse, Shady Street, Newfordburyshire, NE1 410S\"\r",
+									"                    ]\r",
+									"                },\r",
+									"                \"phone\": {\r",
+									"                    \"$id\": \"#/properties/contact/properties/phone\",\r",
+									"                    \"type\": \"string\",\r",
+									"                    \"title\": \"The phone schema\",\r",
+									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                    \"default\": \"\",\r",
+									"                    \"examples\": [\r",
+									"                        \"012345678901\"\r",
+									"                    ]\r",
+									"                },\r",
+									"                \"email\": {\r",
+									"                    \"$id\": \"#/properties/contact/properties/email\",\r",
+									"                    \"type\": \"string\",\r",
+									"                    \"title\": \"The email schema\",\r",
+									"                    \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                    \"default\": \"\",\r",
+									"                    \"examples\": [\r",
+									"                        \"fake@fakeemail.com\"\r",
+									"                    ]\r",
+									"                }\r",
+									"            },\r",
+									"            \"additionalProperties\": true\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Schema is as expected\", function() {\r",
+									"    var response = pm.response.json();\r",
+									"    \r",
+									"    var result=tv4.validateResult(response, schema)\r",
+									"    pm.expect(result.valid).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//call this test after the update branding PUT request, so checking for the updated values here\r",
+									"\r",
+									"pm.test(\"Response body values are as expected\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"   \r",
+									"    pm.expect(jsonData.name).to.equal(\"Shady Meadows B&B\")\r",
+									"    pm.expect(jsonData.map.latitude).to.equal(46.187573)\r",
+									"    pm.expect(jsonData.map.longitude).to.equal(-123.832640)\r",
+									"    pm.expect(jsonData.logoUrl).to.equal(\"https://www.mwtestconsultancy.co.uk/img/rbp-logo.png\")\r",
+									"    pm.expect(jsonData.description).to.equal(\"Welcome to The Goonies House, a delightful Bed & Breakfast nestled in the hills of Astoria, Oregon. A place so beautiful you will never want to leave. All our rooms have comfortable beds and we provide breakfast from the locally sourced supermarket. It is a delightful place.\")\r",
+									"    \r",
+									"    pm.expect(jsonData.contact.name).to.equal(\"Shady Meadows B&B\")\r",
+									"    pm.expect(jsonData.contact.address).to.equal(\"The Old Farmhouse, Shady Street, Newfordburyshire, NE1 410S\")\r",
+									"    pm.expect(jsonData.contact.phone).to.equal(\"012345678901\")\r",
+									"    pm.expect(jsonData.contact.email).to.equal(\"fake@fakeemail.com\")\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "https://automationintesting.online/branding/",
 							"protocol": "https",
@@ -2466,33 +2422,6 @@
 				},
 				{
 					"name": "Room",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"roomNumber\": \"{{random_number}}\",\r\n    \"type\": \"Single\",\r\n    \"accessible\": \"true\",\r\n    \"description\": \"Please enter a description for this room\",\r\n    \"image\": \"https://www.mwtestconsultancy.co.uk/img/room1.jpg\",\r\n    \"roomPrice\": \"{{random_number}}\",\r\n    \"features\": [\r\n        \"WiFi\",\r\n        \"Views\"\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{aitbaseURL}}/room/",
-							"host": [
-								"{{aitbaseURL}}"
-							],
-							"path": [
-								"room",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Room",
 					"event": [
 						{
 							"listen": "test",
@@ -2699,6 +2628,218 @@
 					"response": []
 				},
 				{
+					"name": "RoomIds",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c8214d51-9a53-4a87-83b9-c23c0b6d0794",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"schema = {\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": {},\r",
+									"    \"examples\": [\r",
+									"        {\r",
+									"            \"roomid\": 1,\r",
+									"            \"roomNumber\": 101,\r",
+									"            \"type\": \"single\",\r",
+									"            \"accessible\": true,\r",
+									"            \"image\": \"https://www.mwtestconsultancy.co.uk/img/testim/room2.jpg\",\r",
+									"            \"description\": \"Aenean porttitor mauris sit amet lacinia molestie. In posuere accumsan aliquet. Maecenas sit amet nisl massa. Interdum et malesuada fames ac ante.\",\r",
+									"            \"features\": [\r",
+									"                \"TV\",\r",
+									"                \"WiFi\",\r",
+									"                \"Safe\"\r",
+									"            ],\r",
+									"            \"roomPrice\": 100\r",
+									"        }\r",
+									"    ],\r",
+									"    \"required\": [\r",
+									"        \"roomid\",\r",
+									"        \"roomNumber\",\r",
+									"        \"type\",\r",
+									"        \"accessible\",\r",
+									"        \"image\",\r",
+									"        \"description\",\r",
+									"        \"features\",\r",
+									"        \"roomPrice\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"roomid\": {\r",
+									"            \"$id\": \"#/properties/roomid\",\r",
+									"            \"type\": \"integer\",\r",
+									"            \"title\": \"The roomid schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": 0,\r",
+									"            \"examples\": [\r",
+									"                1\r",
+									"            ]\r",
+									"        },\r",
+									"        \"roomNumber\": {\r",
+									"            \"$id\": \"#/properties/roomNumber\",\r",
+									"            \"type\": \"integer\",\r",
+									"            \"title\": \"The roomNumber schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": 0,\r",
+									"            \"examples\": [\r",
+									"                101\r",
+									"            ]\r",
+									"        },\r",
+									"        \"type\": {\r",
+									"            \"$id\": \"#/properties/type\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The type schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"single\"\r",
+									"            ]\r",
+									"        },\r",
+									"        \"accessible\": {\r",
+									"            \"$id\": \"#/properties/accessible\",\r",
+									"            \"type\": \"boolean\",\r",
+									"            \"title\": \"The accessible schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": false,\r",
+									"            \"examples\": [\r",
+									"                true\r",
+									"            ]\r",
+									"        },\r",
+									"        \"image\": {\r",
+									"            \"$id\": \"#/properties/image\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The image schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"https://www.mwtestconsultancy.co.uk/img/testim/room2.jpg\"\r",
+									"            ]\r",
+									"        },\r",
+									"        \"description\": {\r",
+									"            \"$id\": \"#/properties/description\",\r",
+									"            \"type\": \"string\",\r",
+									"            \"title\": \"The description schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": \"\",\r",
+									"            \"examples\": [\r",
+									"                \"Aenean porttitor mauris sit amet lacinia molestie. In posuere accumsan aliquet. Maecenas sit amet nisl massa. Interdum et malesuada fames ac ante.\"\r",
+									"            ]\r",
+									"        },\r",
+									"        \"features\": {\r",
+									"            \"$id\": \"#/properties/features\",\r",
+									"            \"type\": \"array\",\r",
+									"            \"title\": \"The features schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": [],\r",
+									"            \"examples\": [\r",
+									"                [\r",
+									"                    \"TV\",\r",
+									"                    \"WiFi\"\r",
+									"                ]\r",
+									"            ],\r",
+									"            \"additionalItems\": true,\r",
+									"            \"items\": {\r",
+									"                \"$id\": \"#/properties/features/items\",\r",
+									"                \"anyOf\": [\r",
+									"                    {\r",
+									"                        \"$id\": \"#/properties/features/items/anyOf/0\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The first anyOf schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"TV\",\r",
+									"                            \"WiFi\"\r",
+									"                        ]\r",
+									"                    }\r",
+									"                ]\r",
+									"            }\r",
+									"        },\r",
+									"        \"roomPrice\": {\r",
+									"            \"$id\": \"#/properties/roomPrice\",\r",
+									"            \"type\": \"integer\",\r",
+									"            \"title\": \"The roomPrice schema\",\r",
+									"            \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"            \"default\": 0,\r",
+									"            \"examples\": [\r",
+									"                100\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"additionalProperties\": true\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Schema is as expected\", function() {\r",
+									"    var response = pm.response.json();\r",
+									"    \r",
+									"    var result=tv4.validateResult(response, schema)\r",
+									"    pm.expect(result.valid).to.be.true;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{aitbaseURL}}/room/{{roomid}}",
+							"host": [
+								"{{aitbaseURL}}"
+							],
+							"path": [
+								"room",
+								"{{roomid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Room",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"roomNumber\": \"{{random_number}}\",\r\n    \"type\": \"Single\",\r\n    \"accessible\": \"true\",\r\n    \"description\": \"Please enter a description for this room\",\r\n    \"image\": \"https://www.mwtestconsultancy.co.uk/img/room1.jpg\",\r\n    \"roomPrice\": \"{{random_number}}\",\r\n    \"features\": [\r\n        \"WiFi\",\r\n        \"Views\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{aitbaseURL}}/room/",
+							"host": [
+								"{{aitbaseURL}}"
+							],
+							"path": [
+								"room",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Room",
 					"event": [
 						{
@@ -2710,7 +2851,36 @@
 									"    pm.response.to.have.status(202);\r",
 									"});\r",
 									"\r",
-									""
+									"//added in a negative test to check for absence of response body\r",
+									"pm.test(\"response should be ok to process\", function () {\r",
+									"    pm.response.to.not.be.error;\r",
+									"    pm.response.to.not.have.jsonBody;\r",
+									"});\r",
+									"\r",
+									"//added this test to check that calling get room does not return the room you've just deleted\r",
+									"//the same test for Booking gets 404 not found which seems correct but this gets 500 Server error - should I revert to original test and let it fail?\r",
+									"var url = pm.environment.get(\"aitbaseURL\") + \"/room/\" +  pm.environment.get(\"roomid\");\r",
+									"\r",
+									"const getRequest = {\r",
+									"        url: url,\r",
+									"        method: 'GET'\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(getRequest, function (err, res) {\r",
+									"    if (err) { \r",
+									"        console.log(err);\r",
+									"    }\r",
+									"    \r",
+									"    console.log(res);\r",
+									"    \r",
+									"    pm.test('Response should be Server Error', function () {\r",
+									"        pm.expect(res.status).to.include(\"Server Error\");\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Response code 500\", function() {\r",
+									"        pm.expect(res.code).to.equal(500);\r",
+									"    })\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}

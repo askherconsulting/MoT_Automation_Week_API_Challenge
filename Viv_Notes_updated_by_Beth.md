@@ -11,6 +11,8 @@ API Automation Challenge
 - Create booking endpoint didn't look correct - it was returning a 200 but it wasn't actually generating a new booking.  I've updated the URL from {{aitbaseURL}}/booking to {{aitbaseURL}}/booking/ to fix this
 - To re-run create booking and for it to work every time, there needs to be a unique start/end date OR room availability - to do this I tried a pre-request script for POST booking/ but cant get it to pass the parameter bk, please can you take a look at my notes and see where I'm going wrong?
 - updated PUT booking body fields to match those of POST booking - also think a pre-request script to generate a booking that we can update would be worthwhile
+- DEL room/booking - after viewing a postman advanced testing tutorial I added in a negative test to check for an empty response body/not an error, see what you think.
+- Get Branding - updated response values test to match the updated values as per PUT request and changed order of tests so that this runs after PUT in a collection 
 
 ## Observations
 The following things we might want to just write about in the write up and mention the things we observe as some of it theres little value in automating?
