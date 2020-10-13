@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "575593b3-88cf-4b88-bd07-d8e218dcafbf",
+		"_postman_id": "05abef20-cd14-4511-846f-af938fd1dc61",
 		"name": "MoT Automation Week API Challenge",
 		"description": "Check each response content-type and type/format for each response body item.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -15,7 +15,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a318f680-1f50-4ca6-ab57-9d6eff770e10",
+								"id": "fc422458-df2a-40f5-ba11-5fc2099a1739",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {\r",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
@@ -107,7 +107,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "db03dc03-7666-4f04-86dd-a37a8eb2eb13",
+								"id": "baf26ccc-ee9c-478a-a0b2-10ccc628d12a",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {\r",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
@@ -306,42 +306,44 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "b8b630a3-62e0-4169-92dd-922370363776",
+								"id": "f2c980bb-3f55-4e1c-9854-ff6ce2059915",
 								"exec": [
 									"//do we want to include a script for POST room here so that our dynamic variables will work and the script will always run?  You cannot re-book the same room twice so re-runing script will fail unless room or dates are updated\r",
+									"\r",
+									"pm.environment.set(\"roomNumber\", _.random(2, 999))\r",
 									"\r",
 									"// Test precondition: At least one room is available, so create one\r",
 									"var baseURL = pm.environment.get(\"aitbaseURL\");\r",
 									"var requestURL = baseURL + \"/room/\";\r",
+									"var authToken = pm.environment.get(\"authToken\");\r",
+									"console.log(\"AUTHTOKEN:\" + authToken);\r",
 									"\r",
-									"const echoPostRequest = {\r",
+									"pm.sendRequest({\r",
 									"    url: requestURL,\r",
 									"    method: 'POST',\r",
-									"    header: 'Content-Type:application/json',\r",
+									"     header: {\r",
+									"        'content-type': 'application/json',\r",
+									"        'Cookie': 'token=' + authToken\r",
+									"    },\r",
 									"    body: {\r",
 									"        mode: 'raw',\r",
 									"        raw: JSON.stringify({\r",
-									"            \"roomNumber\": pm.environment.get(\"roomNumber\"),\r",
-									"            \"type\": pm.environment.get(\"type\"),\r",
-									"            \"accessible\": pm.environment.get(\"accessible\"),\r",
-									"            \"description\": pm.environment.get(\"description\"),\r",
-									"            \"image\": pm.environment.get(\"image\"),\r",
-									"            \"roomPrice\": pm.environment.get(\"roomPrice\"),\r",
+									"             \"roomNumber\":  pm.environment.get(\"roomNumber\"),\r",
+									"                \"type\": \"Single\",\r",
+									"                \"accessible\": \"true\",\r",
+									"                \"description\": \"Please enter a description for this room\",\r",
+									"                \"image\": \"https://www.mwtestconsultancy.co.uk/img/room1.jpg\",\r",
+									"                \"roomPrice\": 100,\r",
 									"                \"features\": [\r",
-									"                            \"WiFi\",\r",
-									"                            \"Views\"\r",
-									"                            ]\r",
+									"                    \"WiFi\",\r",
+									"                    \"Views\"]\r",
 									"                        })\r",
 									"            }\r",
-									"};\r",
-									"\r",
-									"//roomid being returned as a null instead of picking up number - how do I fix this? (do I need to parse the response first?)\r",
-									"pm.sendRequest(echoPostRequest, function (err, res) {\r",
-									" //   pm.environment.set(\"roomid\", res.json().roomid);\r",
-									"    var logTitle = pm.info.requestName + \" | \" + pm.info.eventName + \":\\n\";\r",
-									"    console.log(err ? err : logTitle + JSON.stringify(res.json(), null, 2));\r",
-									"});\r",
-									""
+									"}, function (err, res) {\r",
+									"   pm.environment.set(\"roomid\", res.json().roomid);\r",
+									"   var logTitle = pm.info.requestName + \" | \" + pm.info.eventName + \":\\n\";\r",
+									"   console.log(err ? err : logTitle + JSON.stringify(res.json(), null, 2));\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -384,7 +386,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "41a67603-9abd-4f56-8eb9-55b7a130cd0a",
+								"id": "300490b8-3942-4791-894e-6e57c8d35a01",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
@@ -534,7 +536,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "e8949bb2-5db2-4101-a58c-59557f839ebe",
+								"id": "d6fdd6a3-d95c-4f33-9633-49b93e1bbcf0",
 								"exec": [
 									""
 								],
@@ -564,7 +566,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "34db134c-e0e1-4698-89fe-a71d93961bd3",
+								"id": "ddd7c055-4fb9-443f-b0e3-05591e97e36b",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
@@ -636,7 +638,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "e88b1910-a99e-43ea-a1b5-bc342ee1cbf8",
+								"id": "cae60992-c7b1-4ffe-b703-23c873a8570c",
 								"exec": [
 									"//insert a pre-request script to generate a booking first"
 								],
@@ -646,7 +648,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "bab61348-8ca4-4333-85fe-f509791426aa",
+								"id": "2cab1583-300c-492b-b6d2-901429021a71",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
@@ -875,7 +877,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "40585d2d-d578-4b16-bb02-a08dd98be4e0",
+								"id": "e59b98e4-8d81-446a-860a-e0bb73cf18a6",
 								"exec": [
 									"// Test precondition: At least one booking exists, so create one",
 									"",
@@ -917,7 +919,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "500e9b59-6811-41c7-a30d-b54dad1a8327",
+								"id": "a213e646-1f43-4466-9809-e721ca8f005a",
 								"exec": [
 									"//added in a negative test to check for absence of response body/error",
 									"pm.test(\"response should be ok to process\", function () {",
@@ -1034,7 +1036,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "81b8db6d-2a3b-446c-af77-0d18bcdec5b1",
+						"id": "3076a8b9-7fa7-4464-b340-3baa154ec4e0",
 						"type": "text/javascript",
 						"exec": [
 							"// var baseURL = pm.environment.get(\"baseURL\");",
@@ -1064,7 +1066,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "0755ea4a-d110-4dc3-8ece-88cba0ddf3a5",
+						"id": "19837bcf-69a1-4842-a49e-d1c42d18df9c",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -1083,7 +1085,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "2b7578e3-25a1-471d-ac26-55a4965fe06e",
+								"id": "d68703f3-a1c1-4707-a785-e663c9aced4c",
 								"exec": [
 									"pm.test(\"Status code is 202\", function () {\r",
 									"    pm.response.to.have.status(202);\r",
@@ -1316,7 +1318,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "fb0893b5-eede-4aa2-a543-14925a818a85",
+								"id": "f1bd2e40-cda1-4b0a-85bb-606fac23d1f5",
 								"exec": [
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
@@ -1536,7 +1538,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "468a015e-b70b-4dad-b92c-dc4f91a991db",
+								"id": "9f852a2f-4f1f-4104-ae45-cb6b01152d1b",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -1683,7 +1685,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "69155a07-d1d4-4534-bfc4-0889c7f6fdcf",
+								"id": "5def3e2b-f2f2-4584-a711-6e86e77caf95",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
 									"postman.setEnvironmentVariable(\"messageid\", jsonData.messageid);\r",
@@ -1826,7 +1828,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "7a5210b3-8b66-4a2a-9f2c-67f99aaca705",
+								"id": "4afeb1ff-9206-40ff-8728-830908bb2e13",
 								"exec": [
 									"pm.test(\"Status code is 202\", function () {\r",
 									"    pm.response.to.have.status(202);\r",
@@ -1867,7 +1869,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "d8a64b66-79d2-4165-85d9-9d455c98bcf9",
+								"id": "ac6025b2-100f-40dc-a234-2aa917ac46e3",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -1998,7 +2000,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "6882ac43-52d9-4064-9186-13417f6b7167",
+								"id": "70224032-4eb5-43fa-a015-a19a2a48cbbb",
 								"exec": [
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
@@ -2178,7 +2180,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "c8214d51-9a53-4a87-83b9-c23c0b6d0794",
+								"id": "1f50c208-f0a5-494e-980c-a2ebcf1d64b0",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -2408,13 +2410,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{aitbaseURL}}/room/",
+							"raw": "{{aitbaseURL}}/room/{{roomid}}",
 							"host": [
 								"{{aitbaseURL}}"
 							],
 							"path": [
 								"room",
-								""
+								"{{roomid}}"
 							]
 						}
 					},
@@ -2426,7 +2428,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "7fe45b76-25cc-47ae-9ec9-a45724e390f4",
+								"id": "71a86b32-d27a-4ee7-b063-3c664eaf24ce",
 								"exec": [
 									"pm.test(\"Status code is 201\", function () {\r",
 									"    pm.response.to.have.status(201);\r",
@@ -2586,7 +2588,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "13d972d4-1b65-4663-a8d9-4769276f5f74",
+								"id": "77f1245a-6e35-4767-beb5-7388fede16f3",
 								"exec": [
 									"//using Lodash module to set min and max numbers to be used for room number and price\r",
 									"\r",
@@ -2633,7 +2635,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "c8214d51-9a53-4a87-83b9-c23c0b6d0794",
+								"id": "20178ca4-8c48-481e-9c25-579dbc9346b6",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -2800,13 +2802,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{aitbaseURL}}/room/{{roomid}}",
+							"raw": "{{aitbaseURL}}/room/",
 							"host": [
 								"{{aitbaseURL}}"
 							],
 							"path": [
 								"room",
-								"{{roomid}}"
+								""
 							]
 						}
 					},
@@ -2845,7 +2847,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "407503b1-c46f-4897-9ced-87b394cd1c26",
+								"id": "4acd4e08-2389-4548-8e0c-a86b36e4159d",
 								"exec": [
 									"pm.test(\"Status code is 202\", function () {\r",
 									"    pm.response.to.have.status(202);\r",
@@ -2925,12 +2927,12 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "6c14bea7-2e27-462a-bc1e-4d88913bd0dd",
+				"id": "0e3c5c00-ddaa-40f1-8713-94d9b6f430a2",
 				"type": "text/javascript",
 				"exec": [
 					"var dateNow = new Date();",
 					"pm.environment.set(\"checkin\", dateNow.toISOString().split('T')[0]);",
-					"pm.environment.set(\"checkout\",  new Date(dateNow.setDate(dateNow.getDate() + 7)).toISOString().split('T')[0]);",
+					"pm.environment.set(\"checkout\",  new Date(dateNow.setDate(dateNow.getDate() + generateRandomInteger(1,30))).toISOString().split('T')[0]);",
 					"",
 					"",
 					"function generateRandomInteger(min, max) {",
@@ -2946,7 +2948,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "2f1710cc-742e-4540-9c9b-8c9581b8296a",
+				"id": "94a5f516-b919-4182-8ed6-0d7a39af2131",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -2956,22 +2958,22 @@
 	],
 	"variable": [
 		{
-			"id": "ec461322-0b90-4f45-8a19-ed2c5907b033",
+			"id": "8bf19b46-c8d1-45e7-a206-a147a1850463",
 			"key": "checkin",
 			"value": ""
 		},
 		{
-			"id": "eae22d30-6df1-4651-a7b7-3d7bcb5a0d4e",
+			"id": "8f658735-9d63-4f97-a39e-bc00d8a4ff6e",
 			"key": "checkout",
 			"value": ""
 		},
 		{
-			"id": "a89d814b-2dcf-4939-a5f9-0d2bc400ce0e",
+			"id": "baf04408-2614-4b85-81e6-c2cea83a3885",
 			"key": "totalpaid",
 			"value": ""
 		},
 		{
-			"id": "ea70b023-03fb-484e-907f-d7b15d01e325",
+			"id": "eb8e6aa1-9e04-4940-bc66-b32560082db1",
 			"key": "totalprice",
 			"value": ""
 		}
