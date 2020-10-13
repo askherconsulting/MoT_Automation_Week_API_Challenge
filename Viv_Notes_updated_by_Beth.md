@@ -6,9 +6,7 @@ API Automation Challenge
 - I've changed for the create booking requests values to be dynamic for creating a booking, did we want to do this everywhere where possible? - Makes a lot of sense
 - Some of the API's feel like they need to follow on from each other in a flow e.g. POST booking / get bookings (verify posted booking visible) / PUT booking (same booking) / delete booking - is a pre-request script the best way forward for this? if so, where? Nice idea, I wonder when they 'judge' submissions whether they will follow a happy path flow or not and expect to be able to 'chain' requests... worth some thought.. There are also workflows which might solve this https://learning.postman.com/docs/running-collections/building-workflows/
 - I updated the auth -> create token post request because /auth was giving me a 400.  I added /login to the end and updated the password and this worked fine - working now on my machine, apologies not sure how that happened, I thought I'd checked this.. maybe I didn't check in my changes :(
-
-- I could be wrong about this, but I tried adding a patch request for the automationintestingonline site (as opposed to restfulbooker.herokuapp) and I get a 405 method not allowed - is it poss that this endpoint hasn't been added here? - Couldn't quite get this working either. Might be worth posting in the MoT forum to ask if there's a known issue with this endpoint and type of request?
-
+- I could be wrong about this, but I tried adding a patch request for the automationintestingonline site (as opposed to restfulbooker.herokuapp) and I get a 405 method not allowed - is it poss that this endpoint hasn't been added here? - Got this working, it appears it's a put and so needs a complete body rather than a partial using a PUT. Could be an issue but for now I just got this working, maybe this is just something we can document in the write up and an observation?
 - Create booking test was not adding the booking ID to the environment variable - I updated the response reference so that it now does - thank you!
 - Create booking endpoint didn't look correct - it was returning a 200 but it wasn't actually generating a new booking.  I've updated the URL from {{aitbaseURL}}/booking to {{aitbaseURL}}/booking/ to fix this
 - To re-run create booking and for it to work every time, there needs to be a unique start/end date OR room availability - to do this I tried a pre-request script for POST booking/ but cant get it to pass the parameter bk, please can you take a look at my notes and see where I'm going wrong? - Wow, 2 hours of my life later and a couple of beers, it now works!!! So it turns out it was returning a 403 which I hadn't really thought about. After lots of console.log statements I realised we were not passing an auth token when creating the room - it should work now.. the script might need a tidy up :-S
@@ -21,6 +19,7 @@ The following things we might want to just write about in the write up and menti
 - Some endpoints do not require auth where as some do?
 - The creation endpoint returns the wrong status codes? I've added a test which currently fails as the API is wrong - it returns a 200 not a 201 on creation.
 - The creation endpoint allows you to inject XSS, I didn't think we should automate checks for these but should def mention it?
+- Patch request didn't work, would only work as a PUT request for updating a booking - was this intended and wrongly documented?
 
 ## Features of our testing approach
 - Worth talking about contract testing in write up as this is valuable and I'm glad I learnt about it

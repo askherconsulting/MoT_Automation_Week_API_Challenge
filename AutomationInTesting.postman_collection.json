@@ -999,7 +999,7 @@
 				{
 					"name": "PartialUpdateBooking",
 					"request": {
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -1016,16 +1016,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"firstname\" : \"{{$randomFirstName}}\",\n    \"lastname\" : \"{{$randomLastName}}\"\n}"
+							"raw": "{\n    \"bookingdates\": {\n        \"checkin\": \"{{checkin}}\",\n        \"checkout\": \"{{checkout}}\"\n    },\n    \"bookingid\": {{bookingid}},\n    \"depositpaid\": {{$randomBoolean}},\n    \"firstname\": \"{{$randomFirstName}}\",\n    \"lastname\": \"{{$randomLastName}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"phone\": \"{{$randomPhoneNumber}}\",\n    \"roomid\": {{roomid}}\n}"
 						},
 						"url": {
-							"raw": "{{aitbaseURL}}/booking/1",
+							"raw": "{{aitbaseURL}}/booking/{{bookingid}}",
 							"host": [
 								"{{aitbaseURL}}"
 							],
 							"path": [
 								"booking",
-								"1"
+								"{{bookingid}}"
 							]
 						}
 					},
@@ -2958,22 +2958,22 @@
 	],
 	"variable": [
 		{
-			"id": "8bf19b46-c8d1-45e7-a206-a147a1850463",
+			"id": "ec9bd0e2-c91b-446e-bf1b-226b39de8e49",
 			"key": "checkin",
 			"value": ""
 		},
 		{
-			"id": "8f658735-9d63-4f97-a39e-bc00d8a4ff6e",
+			"id": "a96a0a27-06fa-4b69-ba75-7f0d2bafd51d",
 			"key": "checkout",
 			"value": ""
 		},
 		{
-			"id": "baf04408-2614-4b85-81e6-c2cea83a3885",
+			"id": "0742b290-e191-4427-8471-e03dd23aa43c",
 			"key": "totalpaid",
 			"value": ""
 		},
 		{
-			"id": "eb8e6aa1-9e04-4940-bc66-b32560082db1",
+			"id": "709141fb-f0cc-4c78-be6c-10a22523b714",
 			"key": "totalprice",
 			"value": ""
 		}
