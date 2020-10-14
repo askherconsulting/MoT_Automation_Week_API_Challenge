@@ -1796,6 +1796,52 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6822dadf-a7f9-4af3-88d4-ad822144b53a",
+								"exec": [
+									"pm.environment.set(\"roomNumber\", _.random(2, 999))\r",
+									"\r",
+									"// Test precondition: At least one room is available, so create one\r",
+									"var baseURL = pm.environment.get(\"aitbaseURL\");\r",
+									"var requestURL = baseURL + \"/branding/\";\r",
+									"var authToken = pm.environment.get(\"authToken\");\r",
+									"console.log(\"AUTHTOKEN:\" + authToken);\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: requestURL,\r",
+									"    method: 'PUT',\r",
+									"     header: {\r",
+									"        'content-type': 'application/json',\r",
+									"        'Cookie': 'token=' + authToken\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"                \"name\": \"Shady Meadows B&B\",\r",
+									"                \"map\": {\r",
+									"                    \"latitude\": \"46.187573\",\r",
+									"                    \"longitude\": \"-123.832640\"\r",
+									"                },\r",
+									"                \"logoUrl\": \"https://www.mwtestconsultancy.co.uk/img/rbp-logo.png\",\r",
+									"                \"description\": \"Welcome to The Goonies House, a delightful Bed & Breakfast nestled in the hills of Astoria, Oregon. A place so beautiful you will never want to leave. All our rooms have comfortable beds and we provide breakfast from the locally sourced supermarket. It is a delightful place.\",\r",
+									"                \"contact\": {\r",
+									"                    \"name\": \"Shady Meadows B&B\",\r",
+									"                    \"address\": \"The Old Farmhouse, Shady Street, Newfordburyshire, NE1 410S\",\r",
+									"                    \"phone\": \"012345678901\",\r",
+									"                    \"email\": \"fake@fakeemail.com\"\r",
+									"                }\r",
+									"            })\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"   var logTitle = pm.info.requestName + \" | \" + pm.info.eventName + \":\\n\";\r",
+									"   console.log(err ? err : logTitle + JSON.stringify(res.json(), null, 2));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
