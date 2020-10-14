@@ -13,7 +13,7 @@ API Automation Challenge
 - updated PUT booking body fields to match those of POST booking - also think a pre-request script to generate a booking that we can update would be worthwhile
 - DEL room/booking - after viewing a postman advanced testing tutorial I added in a negative test to check for an empty response body/not an error, see what you think. I like this idea, I always seem to get 2 of 4 tests failing though? Maybe I'm doing something wrong??
 - Get Branding - updated response values test to match the updated values as per PUT request and changed order of tests so that this runs after PUT in a collection
-- PUT UpdateBooking - used callbacks to ensure add room and add booking were generated in correct order in pre-request script - this ensures this request can be run in isolation.
+- PUT UpdateBooking - used callbacks to ensure add room and add booking were generated in correct order in pre-request script - this ensures this request can be run in isolation.  ARGH - but after re-running the collection it does them in the wrong order!! Are workflows a better solution to this, or any other ideas?
 
 ## Observations
 The following things we might want to just write about in the write up and mention the things we observe as some of it theres little value in automating?
@@ -28,3 +28,4 @@ The following things we might want to just write about in the write up and menti
 - Used lodash module to set min and max random number generated variable for use in POST room request
 - I'd never used the pre-request strip to actually do a post request for example to setup a room, this was really console
 - Negative testing for the deletion is cool and might be good to talk about also?
+- Beth learnt that regular small merges with master in Github is a much cleaner and easier way of pairing with someone than just getting carried away and dumping a whole load of changes at once!
