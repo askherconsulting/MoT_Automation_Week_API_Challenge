@@ -10,7 +10,7 @@
 			"name": "Auth",
 			"item": [
 				{
-					"name": "CreateTokenAutomationInTesting",
+					"name": "createToken",
 					"event": [
 						{
 							"listen": "test",
@@ -90,6 +90,92 @@
 							"path": [
 								"auth",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validateToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b8d6f378-592a-462b-9aff-ce4d78f7411e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"{{authToken}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{aitbaseURL}}/auth/validate",
+							"host": [
+								"{{aitbaseURL}}"
+							],
+							"path": [
+								"auth",
+								"validate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clearToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b8d6f378-592a-462b-9aff-ce4d78f7411e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"{{authToken}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{aitbaseURL}}/auth/logout",
+							"host": [
+								"{{aitbaseURL}}"
+							],
+							"path": [
+								"auth",
+								"logout"
 							]
 						}
 					},
