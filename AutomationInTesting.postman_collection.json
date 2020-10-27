@@ -3088,8 +3088,7 @@
 								"id": "b00638b9-8a46-4af3-8674-044c4e29b22e",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, so create one\r",
-									"// Pre-condition #2 - at least one room is available, so create one\r",
-									"// Pre-condition #3 : At least one booking exists for that room, so create one (note due to limited number of pre-request scripts needed to run synchronously this is created in the correct order using callbacks - see https://community.postman.com/t/how-i-can-set-in-pre-request-script-to-sequence-for-requests/16563/5 for details)\r",
+									"// Pre-condition #2 : At least one message exists to be read, so create one (note due to limited number of pre-request scripts needed to run synchronously this is created in the correct order using callbacks - see https://community.postman.com/t/how-i-can-set-in-pre-request-script-to-sequence-for-requests/16563/5 for details)\r",
 									"var baseURL = pm.environment.get(\"aitbaseURL\");\r",
 									"var requestURL = baseURL + \"/auth/login\";\r",
 									"var requestURL2 = baseURL + \"/message/\";\r",
