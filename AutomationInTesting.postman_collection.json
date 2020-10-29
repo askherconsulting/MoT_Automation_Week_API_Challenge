@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "718ed85a-d275-473d-9db0-f63f36bf8710",
+		"_postman_id": "d37a4cd5-1489-470e-ad50-f1d9a2f524d7",
 		"name": "MoT Automation Week API Challenge",
 		"description": "Check each response content-type and type/format for each response body item.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -15,7 +15,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b8d6f378-592a-462b-9aff-ce4d78f7411e",
+								"id": "e28aa4f6-0763-4460-8bf7-a41998b34e5b",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -31,7 +31,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "7ac09f25-1b95-48e5-b30c-ba7c8bc0b1ec",
+								"id": "dddb4188-ec9c-4689-b99d-09676eb25dd9",
 								"exec": [
 									"// Test precondition: An authentication token must be generated, so create one.\r",
 									"\r",
@@ -92,7 +92,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b8d6f378-592a-462b-9aff-ce4d78f7411e",
+								"id": "ea78e9af-3912-47ac-b7dd-9f72ef6136ce",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -108,7 +108,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "e2164706-286e-429e-86dd-7e13c314e068",
+								"id": "93899c44-db08-4611-911b-ab398f38a4df",
 								"exec": [
 									"// Test precondition: An authentication token must be generated, so create one. \r",
 									"\r",
@@ -173,7 +173,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0edd2b4b-b43d-452f-a43d-476f3bf2ee20",
+								"id": "bf550477-dab5-458a-a17d-3d9e4dac6f05",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {\r",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
@@ -230,7 +230,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "806a809a-00a2-48bc-87e0-f86eacf1e1b3",
+								"id": "4294afb0-8095-43d9-99f9-3b535c9c27c4",
 								"exec": [
 									"//add environment variables for login credentials to be accessed throughout the collection.\r",
 									"\r",
@@ -278,7 +278,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "13f81a1d-f3ae-438f-8d86-0174c36b8263",
+								"id": "432964f4-487a-411d-9593-71f6c36f789c",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {\r",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
@@ -477,7 +477,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "b97cfa5b-a3b7-427b-bfc4-f16c06e5ef74",
+								"id": "0369e006-e0bc-4165-a3d1-c27ce58d34bc",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, so create one\r",
 									"// Pre-condition #2 - at least one room is available, so create one (note due to limited number of pre-request scripts needed to run synchronously this is created in the correct order using callbacks - see https://community.postman.com/t/how-i-can-set-in-pre-request-script-to-sequence-for-requests/16563/5 for details)\r",
@@ -586,7 +586,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "7946390c-7ecc-4fba-b359-35993e6554ce",
+								"id": "3cfdcbf8-d3cc-4da1-a0f8-4ab638c6acc7",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
@@ -736,7 +736,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "c295fe2e-b8d4-4556-83b9-7b52bc45f914",
+								"id": "2bbf0855-edea-4892-959c-a8fc69e62e5c",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, so create one\r",
 									"// Pre-condition #2 - at least one room is available, so create one \r",
@@ -876,7 +876,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a8c2e2b8-b0ad-407e-b146-e92b4477f473",
+								"id": "c9811f9f-e999-4847-9de7-4d1ed9c77f92",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
@@ -1113,7 +1113,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "171baa19-1448-4d89-b707-988233a41a5f",
+								"id": "100bc99f-646c-473b-bee3-8fb5e778ed26",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, so create one\r",
 									"// Pre-condition #2 - at least one room is available, so create one \r",
@@ -1233,7 +1233,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "46ff1fc2-12f4-4af7-814c-14fb6f43451e",
+								"id": "3d82e9a0-debe-4432-b4b9-a7a49147a13f",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
@@ -1468,7 +1468,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "1e8b9229-7ade-44fb-adc5-1141834d8125",
+								"id": "3d0147b1-3480-49ec-835c-76f7079a88c7",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, so create one",
 									"// Pre-condition #2 - at least one room is available, so create one ",
@@ -1588,7 +1588,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "87fcdeaf-a161-4020-b8ab-4f8886c9f8e6",
+								"id": "376da31b-fab4-485c-9831-2ce5caa089d0",
 								"exec": [
 									"//added in a negative test to check for absence of response body/error",
 									"pm.test(\"response should be ok to process\", function () {",
@@ -1671,7 +1671,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "37a80c9b-0430-4d49-92d7-f8c19a0ed326",
+								"id": "49d90432-9592-4bd8-a547-0cc570593fa8",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, so create one\r",
 									"// Pre-condition #2 - at least one room is available, so create one \r",
@@ -1791,7 +1791,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f6c6d669-48fb-4753-8650-144b16717b76",
+								"id": "f604f96a-1683-405d-9abe-53b0df5b01b8",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {\r",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
@@ -2013,7 +2013,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "8b9de46f-f7a5-4690-a6ac-3efccf1b5281",
+						"id": "d23fa6fc-4bfe-4179-b925-c884442bc454",
 						"type": "text/javascript",
 						"exec": [
 							"// var baseURL = pm.environment.get(\"baseURL\");",
@@ -2043,7 +2043,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "80aaa903-d9ad-42c2-87e9-e66bb568cbcb",
+						"id": "bf84d2f1-fe17-4c31-9f8f-beed74f7c435",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -2062,7 +2062,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "ca6628db-9a2f-4c82-9713-5f3f1ddf2384",
+								"id": "c6bb30b4-f9b0-44f9-9840-69c356e95608",
 								"exec": [
 									"pm.test(\"Status code is 202\", function () {\r",
 									"    pm.response.to.have.status(202);\r",
@@ -2251,7 +2251,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "2f0f60da-56b7-4f59-a401-d389ebfaa4ff",
+								"id": "6107af4a-ca76-4f62-8de3-2d797325dc5f",
 								"exec": [
 									"// Test precondition: An authentication token must be generated, so create one. \r",
 									"\r",
@@ -2327,7 +2327,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "6135b649-6834-41b3-9fce-0f9777cba512",
+								"id": "4d7b5cf0-6f32-47fe-a4a3-e805674436ee",
 								"exec": [
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
@@ -2519,7 +2519,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "6822dadf-a7f9-4af3-88d4-ad822144b53a",
+								"id": "25a11655-c2c0-469a-ad25-96f173788448",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, so create one\r",
 									"// Pre-condition #2 - at least one branding exists, so create one\r",
@@ -2624,7 +2624,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f36b3ef0-399b-42b7-89a5-f8e7b4a83da2",
+								"id": "bb561143-dc9a-4cf1-85b0-840760d19661",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -2766,7 +2766,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "bea78eca-5a12-472b-a913-5a9f205d3a9b",
+								"id": "61cb91c5-6f8f-411f-900d-09c23f260369",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -2820,7 +2820,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "66a8c3b0-08c0-4b71-96f4-fcdc968fa830",
+								"id": "c9cdc8de-e70d-4ef4-a1dd-984c57faeedb",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, so create one\r",
 									"// Pre-condition #2 - at least one room is available, so create one\r",
@@ -2930,7 +2930,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1705df37-4031-49bf-a064-6a576d6efd18",
+								"id": "92117914-81ce-4618-b48c-9ecbab7daf0a",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
 									"postman.setEnvironmentVariable(\"messageid\", jsonData.messageid);\r",
@@ -3073,7 +3073,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "99409f12-6894-473b-bf79-89f7d95b5adc",
+								"id": "70bb0466-4aee-4f99-bfb9-eec76e464547",
 								"exec": [
 									"pm.test(\"Status code is 202\", function () {\r",
 									"    pm.response.to.have.status(202);\r",
@@ -3085,7 +3085,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "b00638b9-8a46-4af3-8674-044c4e29b22e",
+								"id": "0a76880b-bf45-4f17-9e17-88a254b5a7d6",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, so create one\r",
 									"// Pre-condition #2 : At least one message exists to be read, so create one (note due to limited number of pre-request scripts needed to run synchronously this is created in the correct order using callbacks - see https://community.postman.com/t/how-i-can-set-in-pre-request-script-to-sequence-for-requests/16563/5 for details)\r",
@@ -3181,7 +3181,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "fa37c523-8bf3-4276-a73b-cff4ba824b5b",
+								"id": "e581a755-801b-46b7-afa7-d32d8afb68a3",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -3312,7 +3312,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "afc23fcb-cd59-4451-8579-504e09232382",
+								"id": "eb247542-0f56-416c-932c-6c5ff91c5fec",
 								"exec": [
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
@@ -3486,7 +3486,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "346dc282-aae4-422b-88bb-ca37190e2ee8",
+								"id": "1898292d-1669-407e-906c-c5bf3b8c5394",
 								"exec": [
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
@@ -3536,7 +3536,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "e0fbd5c1-b58a-4669-8014-8cbe8d7e920c",
+								"id": "2c193f2f-d92a-4929-bfcd-e07871eff6c3",
 								"exec": [
 									""
 								],
@@ -3574,7 +3574,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1194141a-19be-4430-9ea5-595aaa27eb20",
+								"id": "a7e1c5a4-91bf-4361-9b64-cae8fbdb1ac1",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -3730,7 +3730,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "fd219f19-3bdb-4d4a-8052-6ebf0eb35997",
+								"id": "4cb7cc57-a34c-4570-9688-b558dddf1841",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, so create one\r",
 									"// Pre-condition #2 - at least one room is available, so create one\r",
@@ -3831,7 +3831,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f8ec7069-e51d-4116-8b3c-26bf08d3ea92",
+								"id": "4962111f-17cc-42bf-bbb8-eef8cf6a4592",
 								"exec": [
 									"pm.test(\"Status code is 201\", function () {\r",
 									"    pm.response.to.have.status(201);\r",
@@ -3991,7 +3991,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "804d7101-fc63-47e7-9153-9efe98db2b0d",
+								"id": "edb16dfe-ca67-459e-9091-8f493c48cae9",
 								"exec": [
 									"//using Lodash module to set min and max numbers to be used for room number and price\r",
 									"\r",
@@ -4065,7 +4065,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f0e29972-8a70-4a74-9942-ddfc9756940f",
+								"id": "6db83d03-a3e6-4299-ba40-927c12e12ee5",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -4340,7 +4340,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "b61bf058-9fbb-4576-9d08-f9d1a79755d7",
+								"id": "95bb5285-4c15-4c8e-9cab-755d2ded35ce",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, so create one\r",
 									"// Pre-condition #2 - at least one room is available, so create one\r",
@@ -4455,7 +4455,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "9a293e41-cf0d-4ecf-b8c3-2c87c1c6f7a8",
+								"id": "b8fb1b6e-ccd5-43c5-8bf2-b149143e68c1",
 								"exec": [
 									"pm.test(\"Status code is 202\", function () {\r",
 									"    pm.response.to.have.status(202);\r",
@@ -4498,7 +4498,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "2ee9910c-6200-4790-822f-8e2fa31a8682",
+								"id": "0baf30f2-da7f-4d5c-baaf-2d6defcaa462",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, so create one\r",
 									"// Pre-condition #2 - at least one room is available, so create one\r",
@@ -4609,7 +4609,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "3f6c9e33-35c1-471f-b7f6-190132434c26",
+				"id": "ad9cda85-a1c9-4530-a548-2fa3cc167b5f",
 				"type": "text/javascript",
 				"exec": [
 					"var dateNow = new Date();",
@@ -4630,7 +4630,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "aed736f1-90e7-47b6-a567-83d9b9715c89",
+				"id": "1cff8568-d378-45d9-b72e-bf155762e2cc",
 				"type": "text/javascript",
 				"exec": [
 					""
