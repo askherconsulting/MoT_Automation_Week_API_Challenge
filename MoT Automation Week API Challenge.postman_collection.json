@@ -650,6 +650,8 @@
 									"\r",
 									"pm.environment.set(\"firstname\", \"Beth\");\r",
 									"pm.environment.set(\"lastname\", \"Marshall\");\r",
+									"pm.environment.set(\"email\", \"test@hotmail.com\");\r",
+									"pm.environment.set(\"phone\", \"07998889339\");\r",
 									"\r",
 									"//create checkin and checkout date variables\r",
 									"\r",
@@ -980,6 +982,8 @@
 									"\r",
 									"pm.environment.set(\"firstname\", \"Beth\");\r",
 									"pm.environment.set(\"lastname\", \"Marshall\");\r",
+									"pm.environment.set(\"email\", \"test@hotmail.com\");\r",
+									"pm.environment.set(\"phone\", \"07998889339\");\r",
 									"\r",
 									"//create checkin and checkout date variables\r",
 									"\r",
@@ -1288,6 +1292,8 @@
 									"",
 									"pm.environment.set(\"firstname\", \"Beth\");",
 									"pm.environment.set(\"lastname\", \"Marshall\");",
+									"pm.environment.set(\"email\", \"test@hotmail.com\");",
+									"pm.environment.set(\"phone\", \"07998889339\");",
 									"",
 									"//create checkin and checkout date variables",
 									"",
@@ -1444,6 +1450,8 @@
 									"\r",
 									"pm.environment.set(\"firstname\", \"Beth\");\r",
 									"pm.environment.set(\"lastname\", \"Marshall\");\r",
+									"pm.environment.set(\"email\", \"test@hotmail.com\");\r",
+									"pm.environment.set(\"phone\", \"07998889339\");\r",
 									"\r",
 									"//create checkin and checkout date variables\r",
 									"\r",
@@ -2740,6 +2748,15 @@
 									"var baseURL = pm.environment.get(\"aitbaseURL\");\r",
 									"var requestURL = baseURL + \"/message/\";\r",
 									"var authToken = pm.environment.get(\"authToken\");\r",
+									"\r",
+									"// Define a new object\r",
+									"var username = pm.environment.set(\"username\", \"John\");\r",
+									"var email = pm.environment.set(\"email\", \"test@hotmail.com\");\r",
+									"var phone = pm.environment.set(\"phone\", \"07799883929\");\r",
+									"var subject = pm.environment.set(\"subject\", \"I'd like to book a room please!\");\r",
+									"var description = pm.environment.set(\"description\", \"Can I have a lovely room I promise I won't leave it in a mess, but my kids might\");\r",
+									"\r",
+									"\r",
 									"const interval = setTimeout(() => {}, 4000);\r",
 									"\r",
 									"\r",
@@ -2756,7 +2773,7 @@
 									"                            \"name\": pm.environment.get(\"username\"),\r",
 									"                            \"email\": pm.environment.get(\"email\"),\r",
 									"                            \"phone\": pm.environment.get(\"phone\"),\r",
-									"                            \"subject\":pm.environment.get(\"email\"),\r",
+									"                            \"subject\":pm.environment.get(\"subject\"),\r",
 									"                            \"description\": pm.environment.get(\"description\")\r",
 									"                                        })\r",
 									"                        }\r",
@@ -2781,11 +2798,9 @@
 							}
 						],
 						"url": {
-							"raw": "https://automationintesting.online/message/{{messageid}}/read",
-							"protocol": "https",
+							"raw": "{{aitbaseURL}}/message/{{messageid}}/read",
 							"host": [
-								"automationintesting",
-								"online"
+								"{{aitbaseURL}}"
 							],
 							"path": [
 								"message",
@@ -4139,6 +4154,7 @@
 					"",
 					"pm.environment.set(\"username\", \"admin\");",
 					"pm.environment.set(\"password\", \"password\");",
+					"pm.environment.set(\"aitbaseURL\", \"https://automationintesting.online\")",
 					"",
 					"var baseURL = pm.environment.get(\"aitbaseURL\");",
 					"var requestURL = baseURL + \"/auth/login\";",
@@ -4177,22 +4193,22 @@
 	],
 	"variable": [
 		{
-			"id": "dab18f7b-89e3-4717-b7f8-5ff13d06ed7a",
+			"id": "f658ca6e-5f68-4497-9ffb-5f6b4d93dd2a",
 			"key": "checkin",
 			"value": ""
 		},
 		{
-			"id": "d45ebe76-9a4b-4a78-8351-8177e1885ec0",
+			"id": "c22eda19-56ce-469a-9f5d-0aa5af18461a",
 			"key": "checkout",
 			"value": ""
 		},
 		{
-			"id": "58f07c8f-55fb-449d-a941-c30a6bd33e62",
+			"id": "66e72bf8-d1f9-47cf-84d9-e345792d10ab",
 			"key": "totalpaid",
 			"value": ""
 		},
 		{
-			"id": "7f82a13c-321c-4649-a948-35cfca30ca8d",
+			"id": "a6f824bb-3ba0-4ac0-a5bb-e7525e653ef1",
 			"key": "totalprice",
 			"value": ""
 		}
