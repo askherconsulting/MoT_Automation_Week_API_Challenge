@@ -10,6 +10,82 @@
 			"name": "Auth",
 			"item": [
 				{
+					"name": "SETUP",
+					"item": [
+						{
+							"name": "REMOVE ENV VARS",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "87dc8ea5-971d-4e4c-a6a3-61ede0bfdad6",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "2d4aed0d-fd1b-47ea-88a4-a15885c45deb",
+										"exec": [
+											"// Function that removes all Env Vars (courtesy of Paul Farrell)",
+											"(function () {",
+											"    // Get all the names of our env variables and put them in an array",
+											"    const environmentVariables = pm.environment.values.map(function (variable) {",
+											"        return variable.key;",
+											"    });",
+											"        // Filter through the above array but don't add variables that:",
+											"    // - Contain the string 'host' in the variable name",
+											"    const removeTheseVariables = environmentVariables.filter(function (variable) {",
+											"        return;",
+											"    });",
+											"    // Now go through this new array and null these env variables",
+											"    return removeTheseVariables.forEach(function (variableName) {",
+											"        pm.environment.unset(variableName);",
+											"    });",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://postman-echo.com/delay/0",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"delay",
+										"0"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "createToken",
 					"event": [
 						{
@@ -221,6 +297,82 @@
 		{
 			"name": "Booking",
 			"item": [
+				{
+					"name": "SETUP",
+					"item": [
+						{
+							"name": "REMOVE ENV VARS",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "65d6ad16-d98c-4c71-8ca1-406eb68a0c2d",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "219a2e5c-28ed-4912-90ba-af7ea8a6a143",
+										"exec": [
+											"// Function that removes all Env Vars (courtesy of Paul Farrell)",
+											"(function () {",
+											"    // Get all the names of our env variables and put them in an array",
+											"    const environmentVariables = pm.environment.values.map(function (variable) {",
+											"        return variable.key;",
+											"    });",
+											"        // Filter through the above array but don't add variables that:",
+											"    // - Contain the string 'host' in the variable name",
+											"    const removeTheseVariables = environmentVariables.filter(function (variable) {",
+											"        return;",
+											"    });",
+											"    // Now go through this new array and null these env variables",
+											"    return removeTheseVariables.forEach(function (variableName) {",
+											"        pm.environment.unset(variableName);",
+											"    });",
+											"})();"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://postman-echo.com/delay/0",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"delay",
+										"0"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
 				{
 					"name": "createBooking",
 					"event": [
@@ -1792,6 +1944,82 @@
 			"name": "Branding",
 			"item": [
 				{
+					"name": "SETUP",
+					"item": [
+						{
+							"name": "REMOVE ENV VARS",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e48c73dd-a535-467d-959e-838aeb4f31f4",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "80c8f04a-3f1b-4abe-9e75-b034dcb988c4",
+										"exec": [
+											"// Function that removes all Env Vars (courtesy of Paul Farrell)",
+											"(function () {",
+											"    // Get all the names of our env variables and put them in an array",
+											"    const environmentVariables = pm.environment.values.map(function (variable) {",
+											"        return variable.key;",
+											"    });",
+											"        // Filter through the above array but don't add variables that:",
+											"    // - Contain the string 'host' in the variable name",
+											"    const removeTheseVariables = environmentVariables.filter(function (variable) {",
+											"        return;",
+											"    });",
+											"    // Now go through this new array and null these env variables",
+											"    return removeTheseVariables.forEach(function (variableName) {",
+											"        pm.environment.unset(variableName);",
+											"    });",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://postman-echo.com/delay/0",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"delay",
+										"0"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "updateBranding",
 					"event": [
 						{
@@ -2303,6 +2531,82 @@
 			"name": "Report",
 			"item": [
 				{
+					"name": "SETUP",
+					"item": [
+						{
+							"name": "REMOVE ENV VARS",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e7f02be7-b99c-4374-b662-a350fef165a6",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "6dbcbee9-8761-4743-a65f-674532591dff",
+										"exec": [
+											"// Function that removes all Env Vars (courtesy of Paul Farrell)",
+											"(function () {",
+											"    // Get all the names of our env variables and put them in an array",
+											"    const environmentVariables = pm.environment.values.map(function (variable) {",
+											"        return variable.key;",
+											"    });",
+											"        // Filter through the above array but don't add variables that:",
+											"    // - Contain the string 'host' in the variable name",
+											"    const removeTheseVariables = environmentVariables.filter(function (variable) {",
+											"        return;",
+											"    });",
+											"    // Now go through this new array and null these env variables",
+											"    return removeTheseVariables.forEach(function (variableName) {",
+											"        pm.environment.unset(variableName);",
+											"    });",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://postman-echo.com/delay/0",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"delay",
+										"0"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "getReport",
 					"event": [
 						{
@@ -2580,6 +2884,82 @@
 		{
 			"name": "Messaging",
 			"item": [
+				{
+					"name": "SETUP",
+					"item": [
+						{
+							"name": "REMOVE ENV VARS",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "96a8a5db-ff6e-4b2b-a1c4-103f5401fbd4",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "10c4a628-571a-479a-b226-25d1a15071be",
+										"exec": [
+											"// Function that removes all Env Vars (courtesy of Paul Farrell)",
+											"(function () {",
+											"    // Get all the names of our env variables and put them in an array",
+											"    const environmentVariables = pm.environment.values.map(function (variable) {",
+											"        return variable.key;",
+											"    });",
+											"        // Filter through the above array but don't add variables that:",
+											"    // - Contain the string 'host' in the variable name",
+											"    const removeTheseVariables = environmentVariables.filter(function (variable) {",
+											"        return;",
+											"    });",
+											"    // Now go through this new array and null these env variables",
+											"    return removeTheseVariables.forEach(function (variableName) {",
+											"        pm.environment.unset(variableName);",
+											"    });",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://postman-echo.com/delay/0",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"delay",
+										"0"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
 				{
 					"name": "postMessage",
 					"event": [
@@ -3204,6 +3584,82 @@
 		{
 			"name": "Room",
 			"item": [
+				{
+					"name": "SETUP",
+					"item": [
+						{
+							"name": "REMOVE ENV VARS",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f0fbbc7e-2d34-4ded-b025-f8d2c8e2dca1",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ece1b805-60c0-4d81-b949-abbbd2c1f5a8",
+										"exec": [
+											"// Function that removes all Env Vars (courtesy of Paul Farrell)",
+											"(function () {",
+											"    // Get all the names of our env variables and put them in an array",
+											"    const environmentVariables = pm.environment.values.map(function (variable) {",
+											"        return variable.key;",
+											"    });",
+											"        // Filter through the above array but don't add variables that:",
+											"    // - Contain the string 'host' in the variable name",
+											"    const removeTheseVariables = environmentVariables.filter(function (variable) {",
+											"        return;",
+											"    });",
+											"    // Now go through this new array and null these env variables",
+											"    return removeTheseVariables.forEach(function (variableName) {",
+											"        pm.environment.unset(variableName);",
+											"    });",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://postman-echo.com/delay/0",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"delay",
+										"0"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
 				{
 					"name": "getRoom",
 					"event": [
@@ -4193,22 +4649,22 @@
 	],
 	"variable": [
 		{
-			"id": "f658ca6e-5f68-4497-9ffb-5f6b4d93dd2a",
+			"id": "4002294a-a62f-4621-80e7-449f4c844250",
 			"key": "checkin",
 			"value": ""
 		},
 		{
-			"id": "c22eda19-56ce-469a-9f5d-0aa5af18461a",
+			"id": "7102ded6-fce5-4db2-b6d0-6082647871d2",
 			"key": "checkout",
 			"value": ""
 		},
 		{
-			"id": "66e72bf8-d1f9-47cf-84d9-e345792d10ab",
+			"id": "c00cf02b-0bd9-483a-8bd9-bad3a0deb528",
 			"key": "totalpaid",
 			"value": ""
 		},
 		{
-			"id": "a6f824bb-3ba0-4ac0-a5bb-e7525e653ef1",
+			"id": "9a8080dc-40bf-4829-8d04-629db3435b21",
 			"key": "totalprice",
 			"value": ""
 		}
