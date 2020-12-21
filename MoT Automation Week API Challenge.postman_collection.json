@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "718ed85a-d275-473d-9db0-f63f36bf8710",
 		"name": "MoT Automation Week API Challenge",
-		"description": "Check each response content-type and type/format for each response body item.",
+		"description": "# Introduction\r\nThis API calls every endpoint in the Restful Booker API learning platform\r\n\r\n# Overview\r\nAll endpoints can be run individually or (thanks to pre-request scripts) as part of a collection in any order.\r\n\r\n# Authentication\r\nIs obtained for relevant endpoints via a token, which is achieved via a login request.  Again this is nested in collection/folder/request level scripts as appropriate\r\n\r\n# Error Codes\r\nTBC\r\n\r\n# Other\r\nAll code can be found on github here: https://github.com/askherconsulting/MoT_Automation_Week_API_Challenge ",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -18,7 +18,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "87dc8ea5-971d-4e4c-a6a3-61ede0bfdad6",
 										"exec": [
 											""
 										],
@@ -28,7 +27,6 @@
 								{
 									"listen": "prerequest",
 									"script": {
-										"id": "2d4aed0d-fd1b-47ea-88a4-a15885c45deb",
 										"exec": [
 											"// Function that removes all Env Vars (courtesy of Paul Farrell)",
 											"(function () {",
@@ -81,9 +79,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "createToken",
@@ -91,7 +87,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0edd2b4b-b43d-452f-a43d-476f3bf2ee20",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {\r",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
@@ -148,7 +143,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "806a809a-00a2-48bc-87e0-f86eacf1e1b3",
 								"exec": [
 									""
 								],
@@ -187,7 +181,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b8d6f378-592a-462b-9aff-ce4d78f7411e",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -203,7 +196,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "7ac09f25-1b95-48e5-b30c-ba7c8bc0b1ec",
 								"exec": [
 									"//See pre-request script at collection level"
 								],
@@ -242,7 +234,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b8d6f378-592a-462b-9aff-ce4d78f7411e",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -258,7 +249,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "e2164706-286e-429e-86dd-7e13c314e068",
 								"exec": [
 									"//See pre-request script at collection level"
 								],
@@ -291,8 +281,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Booking",
@@ -306,7 +295,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "65d6ad16-d98c-4c71-8ca1-406eb68a0c2d",
 										"exec": [
 											""
 										],
@@ -316,7 +304,6 @@
 								{
 									"listen": "prerequest",
 									"script": {
-										"id": "219a2e5c-28ed-4912-90ba-af7ea8a6a143",
 										"exec": [
 											"// Function that removes all Env Vars (courtesy of Paul Farrell)",
 											"(function () {",
@@ -369,9 +356,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "createBooking",
@@ -379,7 +364,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "13f81a1d-f3ae-438f-8d86-0174c36b8263",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {\r",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
@@ -578,7 +562,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "b97cfa5b-a3b7-427b-bfc4-f16c06e5ef74",
 								"exec": [
 									"//auth token generated at collection level\r",
 									"//room created at folder level\r",
@@ -636,7 +619,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "7946390c-7ecc-4fba-b359-35993e6554ce",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
@@ -786,7 +768,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "c295fe2e-b8d4-4556-83b9-7b52bc45f914",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, see collection level \r",
 									"// Pre-condition #2 - at least one room is available, see folder level\r",
@@ -881,7 +862,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a8c2e2b8-b0ad-407e-b146-e92b4477f473",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
@@ -1118,7 +1098,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "171baa19-1448-4d89-b707-988233a41a5f",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, see collection level \r",
 									"// Pre-condition #2 - at least one room is available, see folder level\r",
@@ -1193,7 +1172,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "46ff1fc2-12f4-4af7-814c-14fb6f43451e",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
@@ -1428,7 +1406,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "1e8b9229-7ade-44fb-adc5-1141834d8125",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, see collection level ",
 									"// Pre-condition #2 - at least one room is available, see folder level",
@@ -1503,7 +1480,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "87fcdeaf-a161-4020-b8ab-4f8886c9f8e6",
 								"exec": [
 									"//added in a negative test to check for absence of response body/error",
 									"pm.test(\"response should be ok to process\", function () {",
@@ -1586,7 +1562,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "37a80c9b-0430-4d49-92d7-f8c19a0ed326",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, see collection level \r",
 									"// Pre-condition #2 - at least one room is available, see folder level\r",
@@ -1661,7 +1636,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f6c6d669-48fb-4753-8650-144b16717b76",
 								"exec": [
 									"pm.test(\"Response Content-Type should be json\", function () {\r",
 									"     pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
@@ -1883,7 +1857,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "8b9de46f-f7a5-4690-a6ac-3efccf1b5281",
 						"type": "text/javascript",
 						"exec": [
 							"//Pre-condition #1 - authentication token must be generated, so create one - handled at collection level",
@@ -1930,15 +1903,13 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "80aaa903-d9ad-42c2-87e9-e66bb568cbcb",
 						"type": "text/javascript",
 						"exec": [
 							""
 						]
 					}
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Branding",
@@ -1952,7 +1923,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "e48c73dd-a535-467d-959e-838aeb4f31f4",
 										"exec": [
 											""
 										],
@@ -1962,7 +1932,6 @@
 								{
 									"listen": "prerequest",
 									"script": {
-										"id": "80c8f04a-3f1b-4abe-9e75-b034dcb988c4",
 										"exec": [
 											"// Function that removes all Env Vars (courtesy of Paul Farrell)",
 											"(function () {",
@@ -2015,9 +1984,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "updateBranding",
@@ -2025,7 +1992,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "ca6628db-9a2f-4c82-9713-5f3f1ddf2384",
 								"exec": [
 									"pm.test(\"Status code is 202\", function () {\r",
 									"    pm.response.to.have.status(202);\r",
@@ -2214,7 +2180,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "2f0f60da-56b7-4f59-a401-d389ebfaa4ff",
 								"exec": [
 									""
 								],
@@ -2268,7 +2233,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "6135b649-6834-41b3-9fce-0f9777cba512",
 								"exec": [
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
@@ -2460,7 +2424,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "6822dadf-a7f9-4af3-88d4-ad822144b53a",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, see collection level\r",
 									"// Pre-condition #2 - at least one branding exists, so create one\r",
@@ -2524,8 +2487,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Report",
@@ -2539,7 +2501,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "e7f02be7-b99c-4374-b662-a350fef165a6",
 										"exec": [
 											""
 										],
@@ -2549,7 +2510,6 @@
 								{
 									"listen": "prerequest",
 									"script": {
-										"id": "6dbcbee9-8761-4743-a65f-674532591dff",
 										"exec": [
 											"// Function that removes all Env Vars (courtesy of Paul Farrell)",
 											"(function () {",
@@ -2602,9 +2562,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "getReport",
@@ -2612,7 +2570,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f36b3ef0-399b-42b7-89a5-f8e7b4a83da2",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -2754,7 +2711,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "bea78eca-5a12-472b-a913-5a9f205d3a9b",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -2808,7 +2764,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "66a8c3b0-08c0-4b71-96f4-fcdc968fa830",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, so create one - handled at collection level\r",
 									"// Pre-condition #2 - at least one room is available, so create one (note due to limited number of pre-request scripts needed to run synchronously this is created in the correct order using callbacks - see https://community.postman.com/t/how-i-can-set-in-pre-request-script-to-sequence-for-requests/16563/5 for details)\r",
@@ -2878,8 +2833,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Messaging",
@@ -2893,7 +2847,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "96a8a5db-ff6e-4b2b-a1c4-103f5401fbd4",
 										"exec": [
 											""
 										],
@@ -2903,7 +2856,6 @@
 								{
 									"listen": "prerequest",
 									"script": {
-										"id": "10c4a628-571a-479a-b226-25d1a15071be",
 										"exec": [
 											"// Function that removes all Env Vars (courtesy of Paul Farrell)",
 											"(function () {",
@@ -2956,9 +2908,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "postMessage",
@@ -2966,7 +2916,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1705df37-4031-49bf-a064-6a576d6efd18",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
 									"postman.setEnvironmentVariable(\"messageid\", jsonData.messageid);\r",
@@ -3109,7 +3058,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "99409f12-6894-473b-bf79-89f7d95b5adc",
 								"exec": [
 									"pm.test(\"Status code is 202\", function () {\r",
 									"    pm.response.to.have.status(202);\r",
@@ -3121,7 +3069,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "b00638b9-8a46-4af3-8674-044c4e29b22e",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, see collection level\r",
 									"// Pre-condition #2 : At least one message exists to be read, so create one (note due to limited number of pre-request scripts needed to run synchronously this is created in the correct order using callbacks - see https://community.postman.com/t/how-i-can-set-in-pre-request-script-to-sequence-for-requests/16563/5 for details)\r",
@@ -3197,7 +3144,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "fa37c523-8bf3-4276-a73b-cff4ba824b5b",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -3328,7 +3274,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "afc23fcb-cd59-4451-8579-504e09232382",
 								"exec": [
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
@@ -3502,7 +3447,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "346dc282-aae4-422b-88bb-ca37190e2ee8",
 								"exec": [
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
@@ -3552,7 +3496,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "e0fbd5c1-b58a-4669-8014-8cbe8d7e920c",
 								"exec": [
 									""
 								],
@@ -3578,8 +3521,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Room",
@@ -3593,7 +3535,6 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "f0fbbc7e-2d34-4ded-b025-f8d2c8e2dca1",
 										"exec": [
 											""
 										],
@@ -3603,7 +3544,6 @@
 								{
 									"listen": "prerequest",
 									"script": {
-										"id": "ece1b805-60c0-4d81-b949-abbbd2c1f5a8",
 										"exec": [
 											"// Function that removes all Env Vars (courtesy of Paul Farrell)",
 											"(function () {",
@@ -3656,9 +3596,7 @@
 							},
 							"response": []
 						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "getRoom",
@@ -3666,7 +3604,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1194141a-19be-4430-9ea5-595aaa27eb20",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -3822,7 +3759,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "fd219f19-3bdb-4d4a-8052-6ebf0eb35997",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, so create one - handled at collection level\r",
 									"// Pre-condition #2 - at least one room is available, so create one (note due to limited number of pre-request scripts needed to run synchronously this is created in the correct order using callbacks - see https://community.postman.com/t/how-i-can-set-in-pre-request-script-to-sequence-for-requests/16563/5 for details)\r",
@@ -3896,7 +3832,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f8ec7069-e51d-4116-8b3c-26bf08d3ea92",
 								"exec": [
 									"pm.test(\"Status code is 201\", function () {\r",
 									"    pm.response.to.have.status(201);\r",
@@ -4056,7 +3991,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "804d7101-fc63-47e7-9153-9efe98db2b0d",
 								"exec": [
 									"//using Lodash module to set min and max numbers to be used for room number and price\r",
 									"\r",
@@ -4110,7 +4044,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f0e29972-8a70-4a74-9942-ddfc9756940f",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -4385,7 +4318,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "b61bf058-9fbb-4576-9d08-f9d1a79755d7",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, so create one - handled at collection level\r",
 									"// Pre-condition #2 - at least one room is available, so create one (note due to limited number of pre-request scripts needed to run synchronously this is created in the correct order using callbacks - see https://community.postman.com/t/how-i-can-set-in-pre-request-script-to-sequence-for-requests/16563/5 for details)\r",
@@ -4473,7 +4405,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "9a293e41-cf0d-4ecf-b8c3-2c87c1c6f7a8",
 								"exec": [
 									"pm.test(\"Status code is 202\", function () {\r",
 									"    pm.response.to.have.status(202);\r",
@@ -4516,7 +4447,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "2ee9910c-6200-4790-822f-8e2fa31a8682",
 								"exec": [
 									"//Pre-condition #1 - authentication token must be generated, so create one - handled at collection level\r",
 									"// Pre-condition #2 - at least one room is available, so create one (note due to limited number of pre-request scripts needed to run synchronously this is created in the correct order using callbacks - see https://community.postman.com/t/how-i-can-set-in-pre-request-script-to-sequence-for-requests/16563/5 for details)\r",
@@ -4592,15 +4522,13 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		}
 	],
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "3f6c9e33-35c1-471f-b7f6-190132434c26",
 				"type": "text/javascript",
 				"exec": [
 					"//Login to generate a successful authentication token before each test",
@@ -4639,7 +4567,6 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "aed736f1-90e7-47b6-a567-83d9b9715c89",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -4649,25 +4576,20 @@
 	],
 	"variable": [
 		{
-			"id": "4002294a-a62f-4621-80e7-449f4c844250",
 			"key": "checkin",
 			"value": ""
 		},
 		{
-			"id": "7102ded6-fce5-4db2-b6d0-6082647871d2",
 			"key": "checkout",
 			"value": ""
 		},
 		{
-			"id": "c00cf02b-0bd9-483a-8bd9-bad3a0deb528",
 			"key": "totalpaid",
 			"value": ""
 		},
 		{
-			"id": "9a8080dc-40bf-4829-8d04-629db3435b21",
 			"key": "totalprice",
 			"value": ""
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
